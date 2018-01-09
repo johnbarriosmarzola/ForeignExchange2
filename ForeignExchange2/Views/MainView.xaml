@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="ForeignExchange2.Views.MainView"
+    BackgroundColor="Yellow"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+	<ContentPage.Content>
+        <StackLayout
+            Padding="20,30,20,10">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                TextColor="Fuchsia"
+                Text="Foreing Exchange">
+            </Label>
+            <Label
+                Text="Cantidad:"
+                TextColor="Black">
+            </Label>
+            <Entry
+                Placeholder="Suministre la cantidad...">
+            </Entry>
+            <Label
+                Text="Taza Origen"
+                TextColor="Black">
+            </Label>
+            <Picker
+                Title="Seleccione la taza origen...">
+            </Picker>
+
+            <Label
+                Text="Taza Origen"
+                TextColor="Black">
+            </Label>
+            <Picker
+                Title="Seleccione la taza origen...">
+            </Picker>
+
+
+            
+        </StackLayout>    
+	</ContentPage.Content>
+</ContentPage>
