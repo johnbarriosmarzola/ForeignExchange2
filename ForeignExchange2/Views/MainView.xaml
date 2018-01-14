@@ -3,43 +3,127 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="ForeignExchange2.Views.MainView"
-    BackgroundColor="Yellow"
     BindingContext="{Binding Main, Source={StaticResource Locator}}">
-	<ContentPage.Content>
-        <StackLayout
-            Padding="20,30,20,10">
+    <ContentPage.Padding>
+        <OnPlatform 
+            x:TypeArguments="Thickness"
+            iOS="20,30,20,10"
+            Android="20,20,20,10"/>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout>
             <Label
                 FontAttributes="Bold"
                 FontSize="Large"
                 HorizontalOptions="Center"
+                Margin="10"
                 TextColor="Fuchsia"
                 Text="Foreing Exchange">
             </Label>
-            <Label
-                Text="Cantidad:"
-                TextColor="Black">
-            </Label>
-            <Entry
-                Placeholder="Suministre la cantidad...">
-            </Entry>
-            <Label
-                Text="Taza Origen"
-                TextColor="Black">
-            </Label>
-            <Picker
-                Title="Seleccione la taza origen...">
-            </Picker>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
 
-            <Label
-                Text="Taza Origen"
-                TextColor="Black">
-            </Label>
-            <Picker
-                Title="Seleccione la taza origen...">
-            </Picker>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Cantidad:"
+                    TextColor="Black"
+                    VerticalOptions="Center">
+                </Label>
 
+                <Entry
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Text="{Binding Amount, Mode=TwoWay}"
+                    Placeholder="Suministre la cantidad...">
+                </Entry>
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Taza Origen"
+                    TextColor="Black"
+                    VerticalOptions="Center">
+                </Label>
+                <Picker
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Rates}"
+                    SelectedItem="{Binding SourceRate, Mode=TwoWay}"
+                    Title="Seleccione la taza origen...">
+                </Picker>
+
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Taza Destino"
+                    TextColor="Black"
+                    VerticalOptions="Center">
+                </Label>
+                <Picker
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Rates}"
+                    SelectedItem="{Binding TargetRate, Mode=TwoWay}"
+                    Title="Seleccione la taza destino...">
+                </Picker>
+                <Image
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Grid.RowSpan="2"
+                    Source="switch_icon.png"
+                    HeightRequest="40"
+                    WidthRequest="40">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SwitchCommand}"/>
+                    </Image.GestureRecognizers>
+                    
+                </Image>
+                    
+            </Grid>
+            
+          
+   
+           
+
+
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <Button
+                Command="{Binding ConvertCommand}"
+                BackgroundColor="Navy"
+                BorderRadius="25"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                IsEnabled="{Binding IsEnabled,  Mode=TwoWay}"
+                Text="Convertir"
+                TextColor="White">
+            </Button>
+            <Label
+                BackgroundColor="Silver"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontSize="Large"
+                Margin="0,10"
+                Text="{Binding Result,  Mode=TwoWay}"
+                VerticalOptions="FillAndExpand">
+            </Label>
 
             
         </StackLayout>    
-	</ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>
